@@ -26,7 +26,14 @@ public class PokerCounter {
                 }
             }
 
-            if (isSuite) {
+            boolean isCouleur = hand.getCards().stream()
+                    .map(Card::getType)
+                    .distinct()
+                    .count() == 1;
+
+            if (isCouleur) {
+                totalPoints += 45;
+            } else if (isSuite) {
                 totalPoints += 40;
             } else if (hasBrelan) {
                 totalPoints += 30;
