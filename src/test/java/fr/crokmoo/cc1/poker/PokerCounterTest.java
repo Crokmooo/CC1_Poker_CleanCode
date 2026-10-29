@@ -123,4 +123,43 @@ public class PokerCounterTest {
 
         assertThat(counter.count(List.of(brelan, king))).isEqualTo(43);
     }
+
+    @Test
+    void exampleOfCCSubject() {
+        Hand main1 = new Hand(List.of(
+                new Card(Value.DEUX, Type.COEUR),
+                new Card(Value.DEUX, Type.PIQUE),
+                new Card(Value.DEUX, Type.CARREAU),
+                new Card(Value.NEUF, Type.TREFLE),
+                new Card(Value.NEUF, Type.PIQUE)
+        ));
+
+        Hand main2 = new Hand(List.of(
+                new Card(Value.CINQ, Type.TREFLE),
+                new Card(Value.SIX, Type.CARREAU),
+                new Card(Value.SEPT, Type.COEUR),
+                new Card(Value.HUIT, Type.PIQUE),
+                new Card(Value.NEUF, Type.TREFLE)
+        ));
+
+        Hand main3 = new Hand(List.of(
+                new Card(Value.DEUX, Type.COEUR),
+                new Card(Value.SEPT, Type.COEUR),
+                new Card(Value.NEUF, Type.COEUR),
+                new Card(Value.VALET, Type.COEUR),
+                new Card(Value.ROI, Type.COEUR)
+        ));
+
+        Hand main4 = new Hand(List.of(
+                new Card(Value.TROIS, Type.TREFLE),
+                new Card(Value.HUIT, Type.CARREAU),
+                new Card(Value.DIX, Type.COEUR),
+                new Card(Value.DAME, Type.PIQUE),
+                new Card(Value.ROI, Type.TREFLE)
+        ));
+
+        PokerCounter counter = new PokerCounter();
+
+        assertThat(counter.count(List.of(main1, main2, main3, main4))).isEqualTo(148);
+    }
 }
