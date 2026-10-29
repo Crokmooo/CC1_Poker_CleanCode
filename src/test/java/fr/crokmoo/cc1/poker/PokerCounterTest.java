@@ -21,4 +21,18 @@ public class PokerCounterTest {
 
         assertThat(counter.count(List.of(hand))).isEqualTo(13);
     }
+
+    @Test
+    void shouldReturn30PointsForBrelan() {
+        Hand hand = new Hand(List.of(
+                new Card(Value.SEPT, Type.COEUR),
+                new Card(Value.SEPT, Type.PIQUE),
+                new Card(Value.SEPT, Type.CARREAU),
+                new Card(Value.DIX, Type.TREFLE),
+                new Card(Value.ROI, Type.COEUR)
+        ));
+        PokerCounter counter = new PokerCounter();
+
+        assertThat(counter.count(List.of(hand))).isEqualTo(30);
+    }
 }
