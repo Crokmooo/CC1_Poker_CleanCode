@@ -1,0 +1,24 @@
+package fr.crokmoo.cc1.poker;
+
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class PokerCounterTest {
+
+    @Test
+    void shouldReturnHighestCardValue() {
+        Hand hand = new Hand(List.of(
+                new Card(Value.DEUX, Type.COEUR),
+                new Card(Value.CINQ, Type.PIQUE),
+                new Card(Value.HUIT, Type.CARREAU),
+                new Card(Value.DIX, Type.TREFLE),
+                new Card(Value.ROI, Type.COEUR)
+        ));
+        PokerCounter counter = new PokerCounter();
+
+        assertThat(counter.count(List.of(hand))).isEqualTo(13);
+    }
+}
