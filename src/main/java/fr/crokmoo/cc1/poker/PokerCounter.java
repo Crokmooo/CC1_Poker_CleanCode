@@ -13,22 +13,11 @@ public class PokerCounter {
             Map<Value, Long> occurrences = hand.getCards().stream()
                     .collect(Collectors.groupingBy(Card::getValue, Collectors.counting()));
 
-            boolean hasBrelan = occurrences.containsValue(3L);
-            List<Card> sorted = hand.getCards().stream()
-                    .sorted(Comparator.comparingInt(c -> c.getValue().getValue()))
-                    .toList();
-
-            boolean isSuite = true;
-            for (int i = 0; i < sorted.size() - 1; i++) {
-                if (sorted.get(i + 1).getValue().getValue() != sorted.get(i).getValue().getValue() + 1) {
-                    isSuite = false;
-                    break;
-                }
-            }
-
+            boolean isSuite = isSuite(hand);
             boolean isColor = isColor(hand);
 
             boolean hasPair = occurrences.containsValue(2L);
+            boolean hasBrelan = occurrences.containsValue(3L);
             boolean hasCarre = occurrences.containsValue(4L);
 
             if (isSuite && isColor) {
@@ -48,6 +37,19 @@ public class PokerCounter {
             }
         }
         return totalPoints;
+    }
+
+    private boolean isSuite(Hand hand) {
+        List<Card> sorted = hand.getCards().stream()
+                .sorted(Comparator.comparingInt(c -> c.getValue().getValue()))
+                .toList();
+
+        for (int i = 0; i < sorted.size() - 1; i++) {
+            if (sorted.get(i + 1).getValue().getValue() != sorted.get(i).getValue().getValue() + 1) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private boolean isColor(Hand hand) {
