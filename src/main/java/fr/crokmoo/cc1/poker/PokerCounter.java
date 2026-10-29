@@ -26,21 +26,18 @@ public class PokerCounter {
                 }
             }
 
-            boolean isCouleur = hand.getCards().stream()
-                    .map(Card::getType)
-                    .distinct()
-                    .count() == 1;
+            boolean isColor = isColor(hand);
 
             boolean hasPair = occurrences.containsValue(2L);
             boolean hasCarre = occurrences.containsValue(4L);
 
-            if (isSuite && isCouleur) {
+            if (isSuite && isColor) {
                 totalPoints += 80;
             } else if (hasCarre) {
                 totalPoints += 60;
             } else if (hasBrelan && hasPair) {
                 totalPoints += 50;
-            } else if (isCouleur) {
+            } else if (isColor) {
                 totalPoints += 45;
             } else if (isSuite) {
                 totalPoints += 40;
@@ -51,6 +48,13 @@ public class PokerCounter {
             }
         }
         return totalPoints;
+    }
+
+    private boolean isColor(Hand hand) {
+        return hand.getCards().stream()
+                .map(Card::getType)
+                .distinct()
+                .count() == 1;
     }
 
     private int getHighestCardValue(Hand hand) {
