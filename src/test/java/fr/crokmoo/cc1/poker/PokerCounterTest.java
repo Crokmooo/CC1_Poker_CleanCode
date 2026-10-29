@@ -105,4 +105,22 @@ public class PokerCounterTest {
 
         assertThat(counter.count(List.of(hand))).isEqualTo(80);
     }
+
+    @Test
+    void shouldReturnTheSumOfHands() {
+        Hand brelan = new Hand(List.of(
+                new Card(Value.SEPT, Type.COEUR), new Card(Value.SEPT, Type.PIQUE),
+                new Card(Value.SEPT, Type.CARREAU), new Card(Value.DIX, Type.TREFLE),
+                new Card(Value.ROI, Type.COEUR)
+        ));
+        Hand king = new Hand(List.of(
+                new Card(Value.DEUX, Type.COEUR), new Card(Value.CINQ, Type.PIQUE),
+                new Card(Value.HUIT, Type.CARREAU), new Card(Value.DIX, Type.TREFLE),
+                new Card(Value.ROI, Type.COEUR)
+        ));
+
+        PokerCounter counter = new PokerCounter();
+
+        assertThat(counter.count(List.of(brelan, king))).isEqualTo(43);
+    }
 }

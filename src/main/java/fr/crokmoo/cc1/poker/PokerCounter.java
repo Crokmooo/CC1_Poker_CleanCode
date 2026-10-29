@@ -33,7 +33,7 @@ public class PokerCounter {
             } else if (hasBrelan) {
                 totalPoints += 30;
             } else {
-                return getHighestCardValue(hand);
+                totalPoints += getHighestCardValue(hand);
             }
         }
         return totalPoints;
