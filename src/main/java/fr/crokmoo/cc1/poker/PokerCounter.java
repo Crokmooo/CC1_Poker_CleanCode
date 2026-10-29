@@ -1,5 +1,6 @@
 package fr.crokmoo.cc1.poker;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -13,8 +14,21 @@ public class PokerCounter {
                     .collect(Collectors.groupingBy(Card::getValue, Collectors.counting()));
 
             boolean hasBrelan = occurrences.containsValue(3L);
+            List<Card> sorted = hand.getCards().stream()
+                    .sorted(Comparator.comparingInt(c -> c.getValue().getValue()))
+                    .toList();
 
-            if (hasBrelan) {
+            boolean isSuite = true;
+            for (int i = 0; i < sorted.size() - 1; i++) {
+                if (sorted.get(i + 1).getValue().getValue() != sorted.get(i).getValue().getValue() + 1) {
+                    isSuite = false;
+                    break;
+                }
+            }
+
+            if (isSuite) {
+                totalPoints += 40;
+            } else if (hasBrelan) {
                 totalPoints += 30;
             } else {
                 totalPoints += hand.getCards().stream()
