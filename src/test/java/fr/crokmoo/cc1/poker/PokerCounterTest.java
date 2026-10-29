@@ -63,4 +63,18 @@ public class PokerCounterTest {
 
         assertThat(counter.count(List.of(hand))).isEqualTo(45);
     }
+
+    @Test
+    void shouldReturn50PointsForFull() {
+        Hand hand = new Hand(List.of(
+                new Card(Value.DEUX, Type.COEUR),
+                new Card(Value.DEUX, Type.PIQUE),
+                new Card(Value.DEUX, Type.CARREAU),
+                new Card(Value.NEUF, Type.TREFLE),
+                new Card(Value.NEUF, Type.PIQUE)
+        ));
+        PokerCounter counter = new PokerCounter();
+
+        assertThat(counter.count(List.of(hand))).isEqualTo(50);
+    }
 }
