@@ -91,4 +91,18 @@ public class PokerCounterTest {
 
         assertThat(counter.count(List.of(hand))).isEqualTo(60);
     }
+
+    @Test
+    void shouldReturn80PointsForQuinteFlush() {
+        Hand hand = new Hand(List.of(
+                new Card(Value.CINQ, Type.TREFLE),
+                new Card(Value.SIX, Type.TREFLE),
+                new Card(Value.SEPT, Type.TREFLE),
+                new Card(Value.HUIT, Type.TREFLE),
+                new Card(Value.NEUF, Type.TREFLE)
+        ));
+        PokerCounter counter = new PokerCounter();
+
+        assertThat(counter.count(List.of(hand))).isEqualTo(80);
+    }
 }
