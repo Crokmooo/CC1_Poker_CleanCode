@@ -16,4 +16,16 @@ public class CardTest {
         Card card = new Card(value, type);
         assertThat(card.getValue()).isBetween(Value.DEUX, Value.AS);
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "CARREAU",
+            "TREFLE",
+            "PIQUE",
+            "COEUR",
+    })
+    void cardShouldHaveType(Type type) {
+        Card card = new Card(Value.AS, type);
+        assertThat(card.getType()).isEqualTo(type);
+    }
 }
