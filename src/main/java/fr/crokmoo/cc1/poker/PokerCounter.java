@@ -32,8 +32,11 @@ public class PokerCounter {
                     .count() == 1;
 
             boolean hasPair = occurrences.containsValue(2L);
+            boolean hasCarre = occurrences.containsValue(4L);
 
-            if (hasBrelan && hasPair) {
+            if (hasCarre) {
+                totalPoints += 60;
+            } else if (hasBrelan && hasPair) {
                 totalPoints += 50;
             } else if (isCouleur) {
                 totalPoints += 45;
