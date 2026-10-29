@@ -47,11 +47,16 @@ public class PokerCounter {
             } else if (hasBrelan) {
                 totalPoints += 30;
             } else {
-                totalPoints += hand.getCards().stream()
-                        .mapToInt(c -> c.getValue().getValue())
-                        .max().orElse(0);
+                return getHighestCardValue(hand);
             }
         }
         return totalPoints;
+    }
+
+    private int getHighestCardValue(Hand hand) {
+        return hand.getCards().stream()
+                .mapToInt(c -> c.getValue().getValue())
+                .max()
+                .orElse(0);
     }
 }
